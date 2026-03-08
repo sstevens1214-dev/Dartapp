@@ -21,17 +21,11 @@
             margin: 20px auto;
             border-collapse: collapse;
             background: #222;
-            max-height: 300px;
-            overflow-y: auto;
         }
 
         th, td {
             padding: 6px 10px;
             border: 1px solid #444;
-        }
-
-        #golf-board svg {
-            overflow: visible;
         }
 
         button {
@@ -65,11 +59,6 @@
             font-weight: bold;
         }
 
-        /* Utility */
-        .hidden {
-            display: none;
-        }
-
         /* ============================
            PDC‑STYLE 501 — LAYOUT
         ============================= */
@@ -85,7 +74,6 @@
             color: #000;
         }
 
-        /* HEADER */
         .pdc501-header {
             display: flex;
             justify-content: space-between;
@@ -114,7 +102,6 @@
             font-weight: 500;
         }
 
-        /* SCOREBOARD LAYOUT */
         .pdc501-scoreboard {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -122,7 +109,6 @@
             margin-bottom: 20px;
         }
 
-        /* PLAYER PANELS */
         .pdc501-player {
             background: #ffffff;
             border: 2px solid #b5b5b5;
@@ -136,7 +122,6 @@
             box-shadow: 0 0 12px rgba(0, 120, 255, 0.35);
         }
 
-        /* NAME ROW */
         .pdc501-name-row {
             display: flex;
             align-items: center;
@@ -157,7 +142,6 @@
             color: #0078ff;
         }
 
-        /* BIG SCORE */
         .pdc501-bigscore {
             font-size: 64px;
             font-weight: bold;
@@ -167,19 +151,16 @@
             text-shadow: 0 0 4px rgba(0,0,0,0.15);
         }
 
-        /* STATS */
         .pdc501-stats {
             margin-top: 5px;
             font-size: 14px;
             color: #333;
-            opacity: 1;
             font-weight: 500;
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 4px 10px;
         }
 
-        /* CHECKOUT SUGGESTION */
         .pdc501-checkout {
             text-align: center;
             font-size: 16px;
@@ -188,7 +169,6 @@
             margin-top: 8px;
         }
 
-        /* HISTORY BOX */
         .pdc501-history-box {
             margin-top: 12px;
             background: #ffffff;
@@ -217,7 +197,6 @@
             padding: 2px 0;
         }
 
-        /* INPUT PANEL + KEYPAD */
         .pdc501-input-panel {
             margin-top: 10px;
         }
@@ -232,7 +211,6 @@
             color: #000;
         }
 
-        /* NUMERIC KEYPAD 0–9 */
         .pdc501-keypad {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -317,15 +295,11 @@
             background: #004422;
         }
 
-        /* Make score table scrollable if tall */
+        /* Scrollable golf score table */
         #golf-score {
             display: block;
             max-height: 260px;
             overflow-y: auto;
-        }
-
-        #golf-score table {
-            width: 100%;
         }
     </style>
 </head>
@@ -342,6 +316,7 @@
             <option value="golf">Golf</option>
         </select>
 
+        <!-- THIS is the only Start button now -->
         <button id="start-game-btn" onclick="startGame()">Start Game</button>
     </div>
 
@@ -356,7 +331,6 @@
     <!-- 501 GAME AREA -->
     <div id="game-area-501" class="hidden pdc501-container">
 
-        <!-- HEADER -->
         <div class="pdc501-header">
             <h2>501 Match</h2>
 
@@ -377,63 +351,48 @@
             </div>
         </div>
 
-        <!-- SCOREBOARD -->
         <div class="pdc501-scoreboard">
-
-            <!-- PLAYER 1 -->
             <div class="pdc501-player" id="p1-panel">
                 <div class="pdc501-name-row">
                     <input id="p1-name-input" value="Player 1">
                     <span id="p1-throw-indicator" class="throw-indicator hidden">•</span>
                 </div>
-
                 <div class="pdc501-bigscore" id="p1-score">501</div>
-
                 <div class="pdc501-stats">
                     <div>Legs: <span id="p1-legs">0</span></div>
                     <div>Avg (Leg): <span id="p1-leg-avg">0.00</span></div>
                     <div>Avg (Match): <span id="p1-set-avg">0.00</span></div>
                     <div>Checkout %: <span id="p1-co">0%</span></div>
                 </div>
-
                 <div class="pdc501-checkout" id="p1-checkout">No checkout</div>
-
                 <div class="pdc501-history-box">
                     <div class="pdc501-history-title">History</div>
                     <div class="pdc501-history-grid" id="p1-history-grid"></div>
                 </div>
             </div>
 
-            <!-- PLAYER 2 -->
             <div class="pdc501-player" id="p2-panel">
                 <div class="pdc501-name-row">
                     <input id="p2-name-input" value="Player 2">
                     <span id="p2-throw-indicator" class="throw-indicator hidden">•</span>
                 </div>
-
                 <div class="pdc501-bigscore" id="p2-score">501</div>
-
                 <div class="pdc501-stats">
                     <div>Legs: <span id="p2-legs">0</span></div>
                     <div>Avg (Leg): <span id="p2-leg-avg">0.00</span></div>
                     <div>Avg (Match): <span id="p2-set-avg">0.00</span></div>
                     <div>Checkout %: <span id="p2-co">0%</span></div>
                 </div>
-
                 <div class="pdc501-checkout" id="p2-checkout">No checkout</div>
-
                 <div class="pdc501-history-box">
                     <div class="pdc501-history-title">History</div>
                     <div class="pdc501-history-grid" id="p2-history-grid"></div>
                 </div>
             </div>
-
         </div>
 
-        <!-- INPUT PANEL -->
         <div class="pdc501-input-panel">
             <input id="score-input" type="number" placeholder="Enter score">
-
             <div class="pdc501-keypad">
                 <button class="kp" data-digit="1">1</button>
                 <button class="kp" data-digit="2">2</button>
@@ -445,35 +404,31 @@
                 <button class="kp" data-digit="8">8</button>
                 <button class="kp" data-digit="9">9</button>
                 <button class="kp" data-digit="0">0</button>
-
                 <button id="kp-clear">Clear</button>
                 <button id="kp-undo">Undo</button>
                 <button id="kp-enter">Enter</button>
             </div>
         </div>
 
-        <!-- HISTORY -->
         <div class="pdc501-history">
             <h3>Leg History</h3>
             <div id="history-p1" class="history-row"></div>
             <div id="history-p2" class="history-row"></div>
         </div>
-
     </div>
 
     <!-- GOLF GAME AREA -->
     <div id="golf-area" class="hidden">
 
-        <!-- Back to menu -->
+        <!-- Back to menu button -->
         <button id="golf-back-btn" onclick="returnToMenu()">Back to Menu</button>
 
-        <!-- Golf Banner -->
         <div class="golf-banner">
             <div class="golf-banner-icon">⛳</div>
             <div class="golf-banner-title">Darts Golf</div>
         </div>
 
-        <!-- Golf Player Setup -->
+        <!-- GOLF SETUP: this is what must disappear once game starts -->
         <div id="golf-setup">
             <h3>Enter Player Names</h3>
             <div>
@@ -486,8 +441,6 @@
                 <input id="golf-name-7" placeholder="Player 7">
                 <input id="golf-name-8" placeholder="Player 8">
             </div>
-
-            <button id="start-golf-btn" onclick="startGolf()">Start Golf</button>
         </div>
 
         <!-- Hole Panel -->
@@ -496,10 +449,7 @@
             <span class="golf-hole-icon">⛳</span>
         </div>
 
-        <!-- Layout: Board + Side Panel -->
         <div class="golf-layout">
-
-            <!-- Dartboard -->
             <div id="golf-board-wrapper">
                 <svg id="golf-board" width="500" height="500" viewBox="-200 -200 400 400">
                     <g id="golf-target-group"></g>
@@ -508,49 +458,41 @@
                 </svg>
             </div>
 
-            <!-- Side Panel -->
             <div class="golf-side-panel">
                 <div class="golf-side-icon">⛳</div>
                 <div class="golf-side-text">Golf Mode Active</div>
             </div>
-
         </div>
 
-        <!-- Scoring Guide -->
         <div id="golf-hole-info" class="golf-info-box"></div>
 
-        <!-- Scoreboard -->
         <table id="golf-score">
             <thead id="golf-score-head"></thead>
             <tbody id="golf-score-body"></tbody>
         </table>
-
     </div>
 
     <script>
-        // BASIC REFERENCES
-        const modeSelect   = document.getElementById("game-mode");
-        const modeSelectBox = document.getElementById("mode-select");
-        const names501     = document.getElementById("names-501");
-        const gameArea501  = document.getElementById("game-area-501");
-        const golfArea     = document.getElementById("golf-area");
-        const golfSetup    = document.getElementById("golf-setup");
-        const golfScoreHead = document.getElementById("golf-score-head");
-        const golfScoreBody = document.getElementById("golf-score-body");
+        const modeSelect      = document.getElementById("game-mode");
+        const modeSelectBox   = document.getElementById("mode-select");
+        const names501        = document.getElementById("names-501");
+        const gameArea501     = document.getElementById("game-area-501");
+        const golfArea        = document.getElementById("golf-area");
+        const golfSetup       = document.getElementById("golf-setup");
+        const golfScoreHead   = document.getElementById("golf-score-head");
+        const golfScoreBody   = document.getElementById("golf-score-body");
 
         let golfPlayers = [];
         let golfCurrentIndex = 0;
 
-        // MODE SWITCH BEHAVIOUR
+        // MODE CHANGE: just toggles which setup is visible
         modeSelect.addEventListener("change", () => {
             if (modeSelect.value === "golf") {
-                // Show golf setup only
                 golfArea.classList.remove("hidden");
                 golfSetup.classList.remove("hidden");
                 names501.classList.add("hidden");
                 gameArea501.classList.add("hidden");
             } else {
-                // Back to 501 setup
                 golfArea.classList.add("hidden");
                 golfSetup.classList.add("hidden");
                 names501.classList.remove("hidden");
@@ -558,25 +500,20 @@
             }
         });
 
-        // START GAME BUTTON (TOP)
+        // TOP "START GAME" BUTTON
         function startGame() {
             if (modeSelect.value === "501") {
-                // Show 501 area
+                // 501 mode
                 gameArea501.classList.remove("hidden");
+                names501.classList.add("hidden");
                 golfArea.classList.add("hidden");
-                golfSetup.classList.add("hidden");
-                names501.classList.add("hidden");
             } else {
-                // For Golf, just show golf setup if not already
-                golfArea.classList.remove("hidden");
-                golfSetup.classList.remove("hidden");
-                gameArea501.classList.add("hidden");
-                names501.classList.add("hidden");
+                // GOLF mode — validate names, then start
+                startGolfFromButton();
             }
         }
 
-        // START GOLF WITH VALIDATION + SETUP HIDE
-        function startGolf() {
+        function startGolfFromButton() {
             const names = [];
             for (let i = 1; i <= 8; i++) {
                 const val = document.getElementById(`golf-name-${i}`).value.trim();
@@ -591,17 +528,22 @@
             golfPlayers = names;
             golfCurrentIndex = 0;
 
-            // Hide setup, show game area
+            // Hide setup block (this is what you asked to disappear)
             golfSetup.classList.add("hidden");
-            golfArea.classList.remove("hidden");
-            modeSelectBox.classList.add("hidden");
 
-            // Build scoreboard and set first player highlight
+            // Hide mode select so it feels like "in game"
+            modeSelectBox.classList.add("hidden");
+            names501.classList.add("hidden");
+            gameArea501.classList.add("hidden");
+
+            // Ensure golf area is visible
+            golfArea.classList.remove("hidden");
+
+            // Build scoreboard + highlight first player
             buildGolfScoreboard();
             updateGolfTurnHighlight();
         }
 
-        // BUILD GOLF SCOREBOARD (simple: one row per player)
         function buildGolfScoreboard() {
             golfScoreHead.innerHTML = "";
             golfScoreBody.innerHTML = "";
@@ -632,7 +574,7 @@
             });
         }
 
-        // HIGHLIGHT CURRENT PLAYER + AUTO-SCROLL
+        // Highlight current player + auto-scroll
         function updateGolfTurnHighlight() {
             for (let i = 0; i < golfPlayers.length; i++) {
                 const row = document.getElementById(`golf-player-row-${i}`);
@@ -646,24 +588,25 @@
             }
         }
 
-        // ADVANCE TURN (you can call this from your scoring logic)
+        // Call this from your scoring logic when you move to next player
         function advanceGolfTurn() {
-            if (golfPlayers.length === 0) return;
+            if (!golfPlayers.length) return;
             golfCurrentIndex = (golfCurrentIndex + 1) % golfPlayers.length;
             updateGolfTurnHighlight();
         }
 
-        // BACK TO MENU
+        // Back to menu button
         function returnToMenu() {
             golfArea.classList.add("hidden");
             gameArea501.classList.add("hidden");
             golfSetup.classList.add("hidden");
-            names501.classList.remove("hidden");
+
             modeSelectBox.classList.remove("hidden");
+            names501.classList.remove("hidden");
             modeSelect.value = "501";
         }
 
-        // OPTIONAL: simple keypad wiring for 501 (if you want to keep using it)
+        // Simple keypad wiring for 501 input
         const scoreInput = document.getElementById("score-input");
         document.querySelectorAll(".kp[data-digit]").forEach(btn => {
             btn.addEventListener("click", () => {
@@ -673,7 +616,7 @@
         document.getElementById("kp-clear").addEventListener("click", () => {
             scoreInput.value = "";
         });
-        // kp-undo / kp-enter would hook into your existing 501 logic
+        // kp-undo / kp-enter should hook into your existing 501 scoring logic
     </script>
 </body>
 </html>
